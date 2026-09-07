@@ -1,5 +1,7 @@
 import express, { type Express, type Request, type Response } from 'express';
 import log4js from 'log4js';
+import './utils/loadEnv.js'; 
+import {testConnection} from './config/db.js'
 
 const { getLogger, configure } = log4js;
 
@@ -21,17 +23,20 @@ configure({
     },
 });
 
-const PORT: number = 3000;
-
 const app: Express = express();
 const logger = getLogger();
+
+testConnection().then(() => {
+    app.listen(process.env.PORT, () => {
+        logger.info(`Server running on http://127.0.0.1:${process.env.PORT}`);
+    });
+}).catch((err: Error) => {
+    logger.error(`Failled to connect to database! Exiting: ${err}`);
+    process.exit(1);
+})
 
 
 app.get('/', (req: Request, res: Response) => {
 
     res.send('test')
 })
-
-app.listen(PORT, () => {
-    logger.info(`Server running on http://127.0.0.1:${PORT}`);
-});
