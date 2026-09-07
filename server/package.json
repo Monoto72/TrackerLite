@@ -1,0 +1,30 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Jira-Backend clone written in ExpressJS",
+  "license": "ISC",
+  "author": "Monoto",
+  "type": "module",
+  "main": "src/app.ts",
+  "scripts": {
+    "build": "tsc -p .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "dev": "tsx watch src/app.ts",
+    "start": "npm run lint && npm run build && node dist/app.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "jiti": "^2.7.0",
+    "log4js": "^6.9.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.5.0",
+    "eslint": "^10.10.0",
+    "globals": "^17.12.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.69.0"
+  }
+}
